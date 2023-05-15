@@ -1,29 +1,11 @@
 import { useReducer } from "react";
 import { data } from "./data";
+import { CLEAR_ALL, RESET_ALL, REMOVE_ITEM } from "./action";
+import reducer from "./reducer";
 
 const defaultState = {
   people: data,
   isLoading: false,
-};
-
-const CLEAR_ALL = "CLEAR_ALL";
-const RESET_ALL = "RESET_ALL";
-const REMOVE_ITEM = "REMOVE_ITEM";
-
-const reducer = (state, action) => {
-  if (action.type === CLEAR_ALL) {
-    return { ...state, people: [] };
-  }
-  if (action.type === RESET_ALL) {
-    return { ...state, people: data };
-  }
-  if (action.type === REMOVE_ITEM) {
-    let newPeople = state.people.filter(
-      (person) => person.id !== action.payload.id
-    );
-    return { ...state, people: newPeople };
-  }
-  throw new Error(`No matching "${action.type}" action`);
 };
 
 const UseStateArray = () => {
@@ -34,11 +16,11 @@ const UseStateArray = () => {
   };
 
   const handleClearAll = () => {
-    dispatch({ type: "CLEAR_ALL" });
+    dispatch({ type: CLEAR_ALL });
   };
 
   const resetPeople = () => {
-    dispatch({ type: "RESET_ALL" });
+    dispatch({ type: RESET_ALL });
   };
 
   return (
